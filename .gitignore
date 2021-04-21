@@ -136,3 +136,10 @@ dmypy.json
 /tests/output/
 /tests/fireworks_dict.json
 /tests/data/aws.yaml
+
+#Pycharm and data things
+.DS_Store
+.idea
+tests/data/CHA.cif
+tests/data/cha/
+*.traj

@@ -126,7 +126,6 @@ class TestOptimizeWithVaps(TestCase):
         output = OptimizeWithVaps.create_simple_workflow(spec_list, ScriptTask)
         print(output.as_dict())
 
-
     def test_run(self):
         #TODO: Find a way to test this fun currently running it works
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
@@ -148,4 +147,27 @@ class TestOptimizeWithVaps(TestCase):
                                     launchpad_path=launchpad_path,
                                     reset_launchpad=True)
 
-        opt_vasp.run()
+        opt_vasp.submit()
+
+    def test_run(self):
+        #TODO: Find a way to test this fun currently running it works
+        folder_path = str(os.path.join(os.getcwd(), 'data', 'water'))
+        spec = {"host_name": 'stampede',
+                "is_zeolite": True,
+                "database_path": db_url,
+                "input_id": 1,
+                "nsw": 1,
+                "my_nsw": 1,
+                "encut": 520.0,
+                "kpts": (1, 1, 1),
+                "ivdw": 12,
+                "isif": 2}
+
+        opt_vasp = OptimizeWithVaps(folder_path=folder_path,
+                                    file_format="traj",
+                                    db_path=db_url,
+                                    specs=[spec],
+                                    launchpad_path=launchpad_path,
+                                    reset_launchpad=True)
+
+        opt_vasp.submit()

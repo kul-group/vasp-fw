@@ -24,6 +24,7 @@ class SaveStructures:
         :param fireworks_dict_path: path to dictionary mapping indices to structures
         :type fireworks_dict_path: str
         """
+        self.new_filename = output_filename
         self.db = connect(db_path)
         if not fireworks_dict_path:
             self.fireworks_dict_path = 'fireworks_dict.json'

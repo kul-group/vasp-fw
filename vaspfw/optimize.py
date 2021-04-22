@@ -76,7 +76,7 @@ class OptimizeWithVaps:
         return filelist_dict
 
     @staticmethod
-    def create_simple_workflow(spec_list: Dict, firework_class: Firework, name=None) -> Workflow:
+    def create_simple_workflow(spec_list: List[Dict], firework_class: Firework, name=None) -> Workflow:
         """
         This class creates a simple workflow using the passed spec list.
         The first element of the spec list becomes the parent process for

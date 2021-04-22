@@ -1,8 +1,17 @@
 
-# firework maker  
+# VASP-FW 
+### Bridging the gap between VASP and fireworks    
 This package bridges fireworks and ASE/VASP/MAZE-sim so that jobs can easily be submitted.   
+ ## Installation
+1. Activate your fireworks conda environment ``source activate fw37``
+2. Clone the repo, navigate into it, and install the package in developer/editible mode 
+```bash
+git clone https://github.com/kul-group/vasp-fw.git
+cd vasp-fw
+pip install -e . 
+```
  
- ## Examples 
+ ## Tutorial  
 ### Submitting a folder of .traj files for optimization 
 
 Create a folder of folders containing the .traj files that you wish to optimize. For example 
@@ -187,5 +196,3 @@ This function prints out confirmations for each successful save and failure, but
 │       ├── opt_from_vasp.traj
 │       └── optimized.traj
 ```
-
-

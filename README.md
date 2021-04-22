@@ -1,4 +1,3 @@
-
 # VASP-FW 
 ### Bridging the gap between VASP and fireworks    
 This package bridges fireworks and ASE/VASP/MAZE-sim so that jobs can easily be submitted.   

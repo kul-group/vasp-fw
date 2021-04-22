@@ -20,7 +20,7 @@ setup(
     license="MIT",
     packages=['vaspfw'],
     include_package_data=True,
-    install_requires=['ase', 'numpy', 'typing'],
+    install_requires=['fireworks', 'pyyaml', 'ase', 'numpy', 'typing'],
 
     classifiers=[
         'Development Status :: 3 - Alpha',

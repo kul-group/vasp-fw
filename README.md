@@ -1,6 +1,9 @@
 # VASP-FW 
 ### Bridging the gap between VASP and fireworks    
 This package bridges fireworks and ASE/VASP/MAZE-sim so that jobs can easily be submitted.   
+## Requirements 
+This package only works with the Kulkarni group fork of fireworks found [here](https://github.com/kul-group/fireworks). Install this package before continuing. 
+
  ## Installation
 1. Activate your fireworks conda environment ``source activate fw37``
 2. Clone the repo, navigate into it, and install the package in developer/editible mode 

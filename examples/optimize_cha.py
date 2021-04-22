@@ -6,7 +6,7 @@ import os
 import yaml
 from ase.io import read, write
 
-from src.optimize import OptimizeWithVaps
+from vaspfw.optimize import OptimizeWithVaps
 
 if __name__ == "__main__":
     with open(os.path.join('data', 'aws.yaml')) as f:

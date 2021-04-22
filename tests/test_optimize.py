@@ -1,6 +1,6 @@
 import subprocess
 from unittest import TestCase
-from src.optimize import OptimizeWithVaps
+from vaspfw.optimize import OptimizeWithVaps
 import os
 from ase.db import connect
 from ase.io import read

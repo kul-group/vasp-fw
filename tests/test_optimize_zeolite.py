@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.optimize import OptimizeWithVaps
+from vaspfw.optimize import OptimizeWithVaps
 import os
 import yaml
 from maze import Zeolite

@@ -1,6 +1,6 @@
 from unittest import TestCase
 import os
-from src.save_structures import SaveStructures
+from vaspfw.save_structures import SaveStructures
 import yaml
 
 with open(os.path.join('data', 'aws.yaml')) as f:

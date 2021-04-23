@@ -49,7 +49,7 @@ class SaveStructures:
         Errors are not thrown, but instead printed.
         """
         for filename, fireworks in self.fireworks_dict.values():
-            new_filename = re.sub(r'[ORFN]', os.path.basename(filename), self.new_filename)
+            new_filename = re.sub(r'\[ORFN\]', Path(filename).stem, self.new_filename)
             new_filename = Path(filename).parents[0] / new_filename
             fw_dict = self.launchpad.get_fw_by_id(fireworks[-1]).as_dict()
             try:

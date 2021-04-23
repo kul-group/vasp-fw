@@ -13,13 +13,13 @@ with open(os.path.join('data', 'aws.yaml')) as f:
 db_url = db_yaml['db']
 launchpad_path = os.path.join(os.getcwd(), 'data', 'my_launchpad_backup.yaml')
 
+
 class TestOptimizeWithVaps(TestCase):
     def assert_atoms_equal(self, atoms1, atoms2):
         for a1, a2 in zip(atoms1, atoms2):
             self.assertEqual(a1.symbol, a2.symbol)
             for p1, p2 in zip(a1.position, a2.position):
                 self.assertEqual(p1, p2)
-
 
     def test_init(self):
         spec = {"host_name": 'stampede',
@@ -78,10 +78,8 @@ class TestOptimizeWithVaps(TestCase):
         program_filelist = opt_vasp.get_atom_file_list()
         self.assertCountEqual(file_list, program_filelist)
 
-
-
     def test_add_atom_files_to_db(self):
-        output_db ="output/test.db"
+        output_db = "output/test.db"
         if os.path.isfile(output_db):
             os.remove(output_db)
         spec = {"host_name": 'stampede',
@@ -109,14 +107,13 @@ class TestOptimizeWithVaps(TestCase):
         db = connect(output_db)
         with self.subTest('test db atoms added'):
             for index, file_path in enumerate(opt_vasp.get_atom_file_list()):
-                db_atoms = db.get_atoms(index+1)
+                db_atoms = db.get_atoms(index + 1)
                 read_atoms = read(file_path)
                 output_dict[index + 1] = file_path
                 self.assert_atoms_equal(db_atoms, read_atoms)
 
         with self.subTest('test correct output dict'):
             self.assertDictEqual(output_dict, output)
-
 
     def test_create_simple_workflow(self):
         spec_list = []
@@ -127,7 +124,7 @@ class TestOptimizeWithVaps(TestCase):
         print(output.as_dict())
 
     def test_run(self):
-        #TODO: Find a way to test this fun currently running it works
+        # TODO: Find a way to test this fun currently running it works
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
         spec = {"host_name": 'stampede',
                 "is_zeolite": True,
@@ -150,7 +147,7 @@ class TestOptimizeWithVaps(TestCase):
         opt_vasp.submit()
 
     def test_run(self):
-        #TODO: Find a way to test this fun currently running it works
+        # TODO: Find a way to test this fun currently running it works
         folder_path = str(os.path.join(os.getcwd(), 'data', 'water'))
         spec = {"host_name": 'stampede',
                 "is_zeolite": True,

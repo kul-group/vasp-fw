@@ -1,3 +1,5 @@
+import os
+import re
 import json
 from pathlib import Path
 
@@ -12,14 +14,15 @@ class SaveStructures:
     Fireworks added optimized structures to a database. This class then loads the optimized structures
     from that database and saves them in the original file structure from which they originated.
     """
-    def __init__(self, db_path: str, launchpad_path: str, output_filename='optimized.traj', fireworks_dict_path=None):
+    def __init__(self, db_path: str, launchpad_path: str, output_filename='[ORFN]_opt.traj', fireworks_dict_path=None):
         """
         This initializes the save structures class
         :param db_path: path to the database (can be an AWS connection string)
         :type db_path: str
         :param launchpad_path: path to fireworks launchpad
         :type launchpad_path: str
-        :param output_filename: the name of the filename in which to save the output (default 'optimized.traj')
+        :param output_filename: the name of the filename in which to save the output (default '[ORFN]_opt.traj')
+        the [ORFN] will be replaced with the original filename.
         :type output_filename: str
         :param fireworks_dict_path: path to dictionary mapping indices to structures
         :type fireworks_dict_path: str
@@ -44,12 +47,10 @@ class SaveStructures:
         """
         Attempts to save the optimized structures to the folder structure.
         Errors are not thrown, but instead printed.
-        :return: None
-        :rtype: None
         """
         for filename, fireworks in self.fireworks_dict.values():
-            new_filename = Path(filename).parents[0] / self.new_filename
-            final_structure_id = \
+            new_filename = re.sub(r'[ORFN]', os.path.basename(filename), self.new_filename)
+            new_filename = Path(filename).parents[0] / new_filename
             fw_dict = self.launchpad.get_fw_by_id(fireworks[-1]).as_dict()
             try:
                 final_structure_id = fw_dict['launches'][0]['action']['stored_data']['output_index']

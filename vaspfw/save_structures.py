@@ -47,13 +47,10 @@ class SaveStructures:
         """
         Attempts to save the optimized structures to the folder structure.
         Errors are not thrown, but instead printed.
-        :return: None
-        :rtype: None
         """
         for filename, fireworks in self.fireworks_dict.values():
             new_filename = re.sub(r'[ORFN]', os.path.basename(filename), self.new_filename)
             new_filename = Path(filename).parents[0] / new_filename
-            final_structure_id = \
             fw_dict = self.launchpad.get_fw_by_id(fireworks[-1]).as_dict()
             try:
                 final_structure_id = fw_dict['launches'][0]['action']['stored_data']['output_index']

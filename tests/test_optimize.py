@@ -13,6 +13,13 @@ with open(os.path.join('data', 'aws.yaml')) as f:
 db_url = db_yaml['db']
 launchpad_path = os.path.join(os.getcwd(), 'data', 'my_launchpad_backup.yaml')
 
+calc_spec = {"encut": 400}
+spec = {"database_path": db_url,
+        "input_id": 1,
+        "calculation_type": "dry_run",
+        "calc_spec": calc_spec,
+        "structure_type": "zeo"}
+
 
 class TestOptimizeWithVaps(TestCase):
     def assert_atoms_equal(self, atoms1, atoms2):
@@ -22,17 +29,6 @@ class TestOptimizeWithVaps(TestCase):
                 self.assertEqual(p1, p2)
 
     def test_init(self):
-        spec = {"host_name": 'stampede',
-                "is_zeolite": True,
-                "database_path": db_url,
-                "input_id": 1,
-                "nsw": 1,
-                "my_nsw": 1,
-                "encut": 520.0,
-                "kpts": (1, 1, 1),
-                "ivdw": 12,
-                "isif": 2}
-
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
         lpad_path = str(os.path.join(os.getcwd(), 'data', 'my_launchpad_backup.yaml'))
         opt_vasp = OptimizeWithVaps(folder_path=folder_path,
@@ -52,17 +48,6 @@ class TestOptimizeWithVaps(TestCase):
         self.assertEqual(opt_vasp.reset_launchpad, True)
 
     def test_get_atom_file_list(self):
-        spec = {"host_name": 'stampede',
-                "is_zeolite": True,
-                "database_path": db_url,
-                "input_id": 1,
-                "nsw": 1,
-                "my_nsw": 1,
-                "encut": 520.0,
-                "kpts": (1, 1, 1),
-                "ivdw": 12,
-                "isif": 2}
-
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
         opt_vasp = OptimizeWithVaps(folder_path=folder_path,
                                     file_format="traj",
@@ -82,16 +67,6 @@ class TestOptimizeWithVaps(TestCase):
         output_db = "output/test.db"
         if os.path.isfile(output_db):
             os.remove(output_db)
-        spec = {"host_name": 'stampede',
-                "is_zeolite": True,
-                "database_path": output_db,
-                "input_id": 1,
-                "nsw": 1,
-                "my_nsw": 1,
-                "encut": 520.0,
-                "kpts": (1, 1, 1),
-                "ivdw": 12,
-                "isif": 2}
 
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
         lpad_path = str(os.path.join(os.getcwd(), 'data', 'my_launchpad_backup.yaml'))
@@ -126,16 +101,6 @@ class TestOptimizeWithVaps(TestCase):
     def test_run(self):
         # TODO: Find a way to test this fun currently running it works
         folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
-        spec = {"host_name": 'stampede',
-                "is_zeolite": True,
-                "database_path": db_url,
-                "input_id": 1,
-                "nsw": 1,
-                "my_nsw": 1,
-                "encut": 520.0,
-                "kpts": (1, 1, 1),
-                "ivdw": 12,
-                "isif": 2}
 
         opt_vasp = OptimizeWithVaps(folder_path=folder_path,
                                     file_format="traj",
@@ -149,16 +114,6 @@ class TestOptimizeWithVaps(TestCase):
     def test_run(self):
         # TODO: Find a way to test this fun currently running it works
         folder_path = str(os.path.join(os.getcwd(), 'data', 'water'))
-        spec = {"host_name": 'stampede',
-                "is_zeolite": True,
-                "database_path": db_url,
-                "input_id": 1,
-                "nsw": 1,
-                "my_nsw": 1,
-                "encut": 520.0,
-                "kpts": (1, 1, 1),
-                "ivdw": 12,
-                "isif": 2}
 
         opt_vasp = OptimizeWithVaps(folder_path=folder_path,
                                     file_format="traj",

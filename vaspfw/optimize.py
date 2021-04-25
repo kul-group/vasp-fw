@@ -85,7 +85,7 @@ class OptimizeWithVaps:
         :param spec_list: List of specs for VASP firework
         :type spec_list: List[Dict]
         :param firework_class: Firework class which spec corresponds to
-        :type firework_class: Firework
+        :type firework_class: Firework  # TODO: CHANGE TO LIST of fireworks
         :param name: name of the workflow
         :type name: str
         :return: The created simple workflow

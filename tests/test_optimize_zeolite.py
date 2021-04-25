@@ -36,3 +36,29 @@ class TestOptimizeZeolite(TestCase):
                                     reset_launchpad=True)
 
         opt_vasp.submit()
+
+    def test_file_list(self):
+        expected = ['/Users/dda/Dropbox/Code/vasp-fw/tests/data/t29_tmpo/02_open2/09_Sn/opt_from_vasp.traj',
+                    '/Users/dda/Dropbox/Code/vasp-fw/tests/data/t29_tmpo/02_open2/02_Sn/opt_from_vasp.traj']
+
+        folder_path = str(os.path.join(os.getcwd(), 'data', 't29_tmpo'))
+        spec = {"is_zeolite": True,
+                "database_path": db_url,
+                "input_id": 1,
+                "nsw": 1,
+                "my_nsw": 1,
+                "encut": 520.0,
+                "kpts": (1, 1, 1),
+                "ivdw": 12,
+                "isif": 2}
+
+        opt_vasp = OptimizeWithVaps(folder_path=folder_path,
+                                    file_format="traj",
+                                    db_path=db_url,
+                                    specs=[spec],
+                                    launchpad_path=launchpad_path,
+                                    reset_launchpad=True)
+
+        file_list = opt_vasp.get_atom_file_list()
+        self.assertCountEqual(file_list, expected)
+

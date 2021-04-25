@@ -56,7 +56,7 @@ class OptimizeWithVaps:
         :return: list of filepaths of atoms-like searilizations (e.g. .traj files)
         :rtype: List[str]
         """
-        paths = Path(self.folder_path).rglob('*' + '.' + self.file_format)
+        paths = Path(self.folder_path).rglob('**/*' + '.' + self.file_format)
         return [str(p) for p in paths]
 
     def add_atom_files_to_db(self, filelist: List[str]) -> Dict:

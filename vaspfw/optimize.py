@@ -7,7 +7,7 @@ import yaml
 from ase.db import connect
 from ase.io import read
 from fireworks import Firework, LaunchPad, Workflow
-from vasp_fw.vasp_db import VASPDB
+from fireworks.vasp_fw.vasp_db import VASPDB
 
 
 class OptimizeWithVaps:

@@ -1,9 +1,7 @@
+
 # VASP-FW 
 ### Bridging the gap between VASP and fireworks    
 This package bridges fireworks and ASE/VASP/MAZE-sim so that jobs can easily be submitted.   
-## Requirements 
-This package only works with the Kulkarni group fork of fireworks found [here](https://github.com/kul-group/fireworks). Install this package before continuing. 
-
  ## Installation
 1. Activate your fireworks conda environment ``source activate fw37``
 2. Clone the repo, navigate into it, and install the package in developer/editible mode 
@@ -63,66 +61,42 @@ Here is an example workflow
 
 Here is an example spec 
 ```python
-spec1 = {"is_zeolite": True,  
-        "database_path": db_url,  
-        "input_id": 1,  
-        "nsw": 1,  
-        "my_nsw": 1,  
-        "encut": 520.0,  
-        "kpts": (1, 1, 1),  
-        "ivdw": 12,  
-        "isif": 2}
+
+calc_spec = {"encut": 400}
+spec = {"database_path": db_url,
+        "input_id": 1,
+        "calculation_type": "alchemy",
+        "calc_spec": calc_spec,
+        "structure_type": "zeo"}
 ```
 
 ### Use vasp-fw to submit all files for the same optimization 
-This is an example script makes the same workflow for all of the traj files in the folder, and submits the workflow to the fireworks launchpad. 
+This is an example script makes the same workflow for all of the traj files in the folder, and submits the workflow to the fireworks launchpad. The test run case alchemy is used, which converts all of the structures to gold. 
 ```python
 import os  
 import yaml  
 from ase.io import read, write  
 from vaspfw.optimize import OptimizeWithVaps  
 
-with open(os.path.join('data', 'aws.yaml')) as f:  
+with open(os.path.join('aws.yaml')) as f:  
     db_yaml = yaml.load(f, Loader=yaml.FullLoader)  
 
 db_url = db_yaml['db']  
-launchpad_path = os.path.join(os.getcwd(), 'data', 'my_launchpad.yaml')  
-folder_path = "sn_bea_tmpo_structures" 
+launchpad_path = os.path.join(os.getcwd(), 'my_launchpad.yaml')  
+folder_path = "structures" 
 
-spec1 = {"is_zeolite": True,  
-        "database_path": db_url,  
-        "input_id": 1,  
-        "nsw": 1,  
-        "my_nsw": 1,  
-        "encut": 400.0,  
-        "kpts": (1, 1, 1),  
-        "ivdw": 12,  
-        "isif": 2}  
+calc_spec = {"encut": 400}
+spec = {"database_path": db_url,
+        "input_id": 1,
+        "calculation_type": "alchemy",
+        "calc_spec": calc_spec,
+        "structure_type": "zeo"}
 
-spec2 = {"is_zeolite": True,  
-        "database_path": db_url,  
-        "input_id": 1,  
-        "nsw": 1,  
-        "my_nsw": 1,  
-        "encut": 600.0,  
-        "kpts": (1, 1, 1),  
-        "ivdw": 12,  
-        "isif": 2}  
 
-spec3 = {"is_zeolite": True, 
-        "database_path": db_url,  
-        "input_id": 1,  
-        "nsw": 1,  
-        "my_nsw": 1,  
-        "encut": 800.0,  
-        "kpts": (1, 1, 1),  
-        "ivdw": 12,  
-        "isif": 2}  
-
-specs = [spec1, spec2, spec3]
+specs = [spec]
 opt_vasp = OptimizeWithVaps(folder_path=folder_path,  
                             file_format="traj",  
-                            db_path=db_url,  
+                           db_path=db_url,  
                             specs=specs,  
                             launchpad_path=launchpad_path,  
                             reset_launchpad=True)  
@@ -139,14 +113,15 @@ import os
 from vaspfw.save_structures import SaveStructures  
 import yaml  
 
-with open(os.path.join('data', 'aws.yaml')) as f:  
+with open(os.path.join( 'aws.yaml')) as f:  
     db_yaml = yaml.load(f, Loader=yaml.FullLoader)  
 
 db_url = db_yaml['db']  
-launchpad_path = os.path.join(os.getcwd(), 'data', 'my_launchpad_backup.yaml')  
+launchpad_path = os.path.join(os.getcwd(), 'my_launchpad.yaml')  
 
 save_structures = SaveStructures(db_path=db_url, launchpad_path=launchpad_path)  
 save_structures.save()
+
 ```
 
 This function prints out confirmations for each successful save and failure, but does not throw exceptions. After running this file check out your original folder structure. You should see an additional, optimized file in each folder. 
@@ -198,3 +173,7 @@ This function prints out confirmations for each successful save and failure, but
 │       ├── opt_from_vasp.traj
 │       └── optimized.traj
 ```
+
+
+
+

@@ -15,6 +15,6 @@ pip install -e .
 ```
 
 ## Additional Guides 
-1. [Fireworks Configuration](https://github.com/kul-group/fireworks-guide/blob/main/fireworks_config.md)
+1. [Fireworks Configuration](https://github.com/kul-group/vasp-fw/blob/main/fireworks_config.md)
 2. [Running SLURM Jobs](https://github.com/kul-group/fireworks-guide/blob/main/running_slurm_jobs.md)
-4. [VASP + Fireworks (VASP-FW) Tutorial](https://github.com/kul-group/vasp-fw/tutorial.md) a package that makes VASP/Fireworks intergration easy.
+3. [VASP-FW Tutorial](https://github.com/kul-group/vasp-fw/blob/main/tutorial.md)
